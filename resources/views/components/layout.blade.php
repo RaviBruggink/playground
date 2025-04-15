@@ -14,6 +14,7 @@
             <x-nav-link href="{{ url('/') }}" :active="request()->is('/')">Home</x-nav-link>
             <x-nav-link href="{{ url('about') }}" :active="request()->is('about')">About</x-nav-link>
             <x-nav-link href="{{ url('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
+            <x-nav-link href="{{ url('users') }}" :active="request()->is('users')">Users</x-nav-link>
         </div>
     </nav>
 

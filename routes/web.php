@@ -5,6 +5,8 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
+Route::get('/users/{user}', [UserController::class, 'show'])->name('users.show');
+
 
 Route::get('/', function () {
     $users = User::latest()->get();
@@ -18,3 +20,4 @@ Route::get('/about', function () {
 Route::get('/contact', function () {
     return view('contact');
 });
+
