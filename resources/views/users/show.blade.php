@@ -17,6 +17,16 @@
             <span>{{ $user->created_at->format('F j, Y') }}</span>
         </div>
 
-        <a href="{{ route('users.index') }}" class="inline-block mt-4 text-blue-600 hover:underline">← Back to users</a>
+        <div class="flex justify-between items-center mt-6">
+            <a href="{{ route('users.index') }}" class="text-blue-600 hover:underline">← Back to users</a>
+
+            <form action="{{ route('users.destroy', $user) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow">
+                    Delete User
+                </button>
+            </form>
+        </div>
     </div>
 </x-layout>

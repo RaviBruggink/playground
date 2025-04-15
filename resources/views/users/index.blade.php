@@ -1,5 +1,18 @@
 <x-layout>
-    <h2 class="text-2xl font-semibold mt-6 mb-4">Users</h2>
+    @if (session('success'))
+        <div class="mb-4 p-4 bg-green-100 text-green-800 rounded shadow">
+            {{ session('success') }}
+        </div>
+    @endif
+    <div class="flex flex-col md:flex-row items-start md:items-center justify-between mt-6 mb-4 gap-4">
+        <h2 class="text-2xl font-semibold">Users</h2>
+        <div class="flex justify-start md:justify-end">
+            <x-button href="{{ route('users.create') }}">
+                + Create User
+            </x-button>            
+        </div>
+    </div>
+    
 
     <div class="overflow-x-auto bg-white shadow rounded">
         <table class="min-w-full divide-y divide-gray-200">
