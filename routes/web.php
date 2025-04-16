@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\User;
+use App\Http\Controllers\ProjectController;
 
 // removed because Route::resource is more efficient
 
@@ -12,11 +13,11 @@ use App\Models\User;
 // Route::post('/users', [UserController::class, 'store'])->name('users.store');
 
 Route::resource('users', UserController::class);
+Route::resource('projects', ProjectController::class)->only(['index', 'show']);
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    $users = User::latest()->get();
-    return view('home', compact('users'));
-});
+Route::get('/', HomeController::class);
+
 
 Route::get('/about', function () {
     return view('about');
