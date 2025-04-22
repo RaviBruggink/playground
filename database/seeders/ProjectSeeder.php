@@ -14,17 +14,24 @@ class ProjectSeeder extends Seeder
     public function run(): void
     {
         Project::create([
-            'title' => 'Portfolio Website',
-            'description' => 'A sleek portfolio site using Laravel and Tailwind CSS.',
-            'image' => 'images/portfolio.png',
-            'extra_text' => 'This project was my first deep dive into Laravel.'
+            'title' => 'Portflow Concept',
+            'description' => 'A UX/UI redesign and conceptual overhaul of the Fontys Portflow portfolio tool.',
+            'image' => 'storage/images/placeholder.svg',
+            'extra_text' => 'As part of a multidisciplinary team of 4 students, we reimagined the Portflow tool to better align with user needs and educational goals. We focused on improving usability, streamlining the interface, and introducing features like customizable modules and improved reflection workflows.'
         ]);
-    
+
         Project::create([
-            'title' => 'E-Commerce App',
-            'description' => 'A full-featured online shop with cart and payment.',
-            'image' => 'images/ecommerce.png',
-            'extra_text' => 'Integrates Stripe for payments.'
+            'title' => 'Driv-R App',
+            'description' => 'A fully-functional e-commerce application for a fictional electric car rental service.',
+            'image' => 'storage/images/placeholder.svg',
+            'extra_text' => 'This project included user authentication, a dynamic shopping cart, and Stripe integration for secure payments. The frontend was built in Vue.js while the backend used Laravel, showcasing full-stack development and API communication.'
+        ]);
+
+        Project::create([
+            'title' => 'WellNest Mobile',
+            'description' => 'A self-care and mindfulness app designed to help users build healthier daily habits.',
+            'image' => 'storage/images/placeholder.svg',
+            'extra_text' => 'Developed with Flutter, WellNest includes features like daily mood tracking, guided meditations, habit-building streaks, and a personalized dashboard. Emphasis was placed on UI responsiveness and data visualization.'
         ]);
     }
 }

@@ -1,30 +1,37 @@
 <x-layout>
-    <div class="max-w-2xl mx-auto mt-8 bg-white p-6 shadow rounded">
-        <h2 class="text-2xl font-bold mb-4">User Details</h2>
+    <div class="max-w-2xl mx-auto mt-20 bg-neutral-900 text-white p-10 shadow-xl rounded-2xl">
+        <h2 class="text-3xl font-light uppercase tracking-wide mb-10 border-b border-white/10 pb-4">
+            Gebruiker
+        </h2>
 
-        <div class="mb-4">
-            <span class="font-semibold text-gray-700">Name:</span>
-            <span>{{ $user->name }}</span>
+        <div class="mb-6">
+            <span class="block text-sm uppercase text-gray-400 mb-1">Naam</span>
+            <span class="text-lg font-medium text-white">{{ $user->name }}</span>
         </div>
 
-        <div class="mb-4">
-            <span class="font-semibold text-gray-700">Email:</span>
-            <span>{{ $user->email }}</span>
+        <div class="mb-6">
+            <span class="block text-sm uppercase text-gray-400 mb-1">E-mailadres</span>
+            <span class="text-lg text-gray-300">{{ $user->email }}</span>
         </div>
 
-        <div class="mb-4">
-            <span class="font-semibold text-gray-700">Joined:</span>
-            <span>{{ $user->created_at->format('F j, Y') }}</span>
+        <div class="mb-6">
+            <span class="block text-sm uppercase text-gray-400 mb-1">Geregistreerd op</span>
+            <span class="text-lg text-gray-400">{{ $user->created_at->format('F j, Y') }}</span>
         </div>
 
-        <div class="flex justify-between items-center mt-6">
-            <a href="{{ route('users.index') }}" class="text-blue-600 hover:underline">← Back to users</a>
+        <div class="flex justify-between items-center mt-12">
+            <a href="{{ route('users.index') }}"
+               class="text-sm text-gray-400 hover:text-white hover:underline transition">
+               ← Terug naar overzicht
+            </a>
 
-            <form action="{{ route('users.destroy', $user) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this user?');">
+            <form action="{{ route('users.destroy', $user) }}" method="POST"
+                  onsubmit="return confirm('Weet je zeker dat je deze gebruiker wilt verwijderen?');">
                 @csrf
                 @method('DELETE')
-                <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded shadow">
-                    Delete User
+                <button type="submit"
+                        class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 text-sm rounded-full font-semibold transition">
+                    Verwijder gebruiker
                 </button>
             </form>
         </div>

@@ -2,11 +2,11 @@
 
 @php
     $classes = $active
-        ? 'text-white bg-gray-900 border-b-2 border-blue-500'
-        : 'text-gray-300 hover:text-white hover:bg-gray-700';
+        ? 'text-amber-300 border-b-2 border-amber-300'
+        : 'text-white hover:text-amber-300 hover:border-b hover:border-white/20';
 @endphp
 
-<a {{ $attributes->merge(['class' => "px-3 py-2 rounded-md text-sm font-medium transition duration-150 ease-in-out $classes"]) }}
-    aria-current="{{ $active ? 'page' : 'false' }}">
+<a {{ $attributes->merge(['class' => "px-2 py-1 text-sm uppercase font-medium transition-all duration-200 $classes"]) }}
+   aria-current="{{ $active ? 'page' : 'false' }}">
     {{ $slot }}
 </a>

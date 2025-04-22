@@ -1,31 +1,50 @@
 <x-layout>
-    <div class="max-w-xl mx-auto mt-8 bg-white p-6 shadow rounded">
-        <h2 class="text-2xl font-bold mb-6">Create New User</h2>
+    <div class="max-w-xl mx-auto mt-20 bg-neutral-900 text-white p-10 rounded-2xl shadow-xl">
+        <h2 class="text-3xl font-light uppercase tracking-wide mb-10 text-center">
+            Nieuwe Gebruiker
+        </h2>
 
-        <form action="{{ route('users.store') }}" method="POST" class="space-y-4">
+        <form action="{{ route('users.store') }}" method="POST" class="space-y-6">
             @csrf
 
+            {{-- NAAM --}}
             <div>
-                <label class="block font-medium text-sm text-gray-700">Name</label>
-                <input type="text" name="name" class="w-full border-gray-300 rounded shadow-sm" value="{{ old('name') }}">
-                @error('name') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
+                <label class="block text-sm uppercase font-semibold text-gray-400 mb-2">Naam</label>
+                <input
+                    type="text"
+                    name="name"
+                    value="{{ old('name') }}"
+                    class="w-full px-4 py-2 bg-neutral-800 text-white border border-white/10 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-white transition duration-200"
+                >
+                @error('name')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
+            {{-- EMAIL --}}
             <div>
-                <label class="block font-medium text-sm text-gray-700">Email</label>
-                <input type="email" name="email" class="w-full border-gray-300 rounded shadow-sm" value="{{ old('email') }}">
-                @error('email') <p class="text-red-600 text-sm mt-1">{{ $message }}</p> @enderror
+                <label class="block text-sm uppercase font-semibold text-gray-400 mb-2">E-mailadres</label>
+                <input
+                    type="email"
+                    name="email"
+                    value="{{ old('email') }}"
+                    class="w-full px-4 py-2 bg-neutral-800 text-white border border-white/10 rounded-lg shadow-sm focus:outline-none focus:ring-1 focus:ring-white transition duration-200"
+                >
+                @error('email')
+                    <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                @enderror
             </div>
 
-            <div class="flex justify-end space-x-4">
+            {{-- ACTIES --}}
+            <div class="flex justify-end space-x-4 pt-6">
                 <x-button href="{{ route('users.index') }}" variant="passive">
-                    Cancel
+                    Annuleren
                 </x-button>
-            
+
                 <x-button type="submit">
-                    Create
+                    Opslaan
                 </x-button>
-            </div>                    
+            </div>
         </form>
     </div>
 </x-layout>

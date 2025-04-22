@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Http\Controllers\ProjectController;
-
+use App\Http\Controllers\HomeController;
 // removed because Route::resource is more efficient
 
 // Route::get('/users', [UserController::class, 'index'])->name('users.index');
@@ -14,7 +14,6 @@ use App\Http\Controllers\ProjectController;
 
 Route::resource('users', UserController::class);
 Route::resource('projects', ProjectController::class)->only(['index', 'show']);
-use App\Http\Controllers\HomeController;
 
 Route::get('/', HomeController::class);
 

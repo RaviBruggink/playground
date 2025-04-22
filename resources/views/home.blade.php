@@ -1,82 +1,101 @@
-<x-layout title="Home">
+@push('styles')
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+@endpush
 
-    <section class="h-full flex flex-col items-center py-40 text-center px-4">
-        <h1 class="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-            Hey, I'm <span class="text-indigo-600">Ravi</span>
+@push('scripts')
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ once: true, duration: 800 });
+    </script>
+@endpush
+
+<x-layout title="Home">
+    {{-- HERO SECTION --}}
+    <section class="min-h-screen flex flex-col items-center justify-center text-center bg-neutral-900 text-white px-6 md:px-12 xl:px-32">
+        <h1 class="text-5xl md:text-7xl font-light tracking-wide mb-8 leading-tight" data-aos="fade-up">
+            Hey, ik ben <span class="underline underline-offset-4 decoration-white/30">Ravi</span>
         </h1>
-        <p class="text-lg md:text-xl text-gray-600 max-w-2xl mb-8">
-            I develop web applications and love exploring frameworks.
+        <p class="text-lg md:text-xl text-gray-400 max-w-2xl mb-12" data-aos="fade-up" data-aos-delay="200">
+            Ik ontwerp & ontwikkel webervaringen — strak, snel, betekenisvol.
         </p>
         <a href="{{ url('/projects') }}"
-            class="inline-block px-6 py-3 bg-indigo-600 text-white text-lg rounded-xl hover:bg-indigo-700 transition">
-            View My Work
+           class="px-8 py-3 border border-white text-sm uppercase font-medium tracking-wide rounded-full text-white hover:bg-white hover:text-black transition-all duration-300"
+           data-aos="fade-up" data-aos-delay="400">
+           Bekijk mijn werk
         </a>
     </section>
 
-    <section class="py-20 bg-gray-100 px-6 md:px-16">
-        <h2 class="text-3xl md:text-4xl font-bold mb-12 text-center">Featured Projects</h2>
+    {{-- FEATURED PROJECTS --}}
+    <section class="py-36 px-6 md:px-16 xl:px-32 bg-neutral-800 text-white">
+        <h2 class="text-3xl md:text-4xl font-light tracking-wider text-center uppercase mb-24" data-aos="fade-up">
+            Geselecteerde Projecten
+        </h2>
 
         @if (!isset($projects) || is_null($projects))
-            {{-- Fallback: variable not passed or null --}}
-            <div class="max-w-xl mx-auto bg-black text-white rounded-2xl p-10 text-center shadow-lg">
-                <h3 class="text-2xl font-bold mb-4">Oops! Something went wrong.</h3>
-                <p class="text-gray-300">We couldn’t load the projects right now. Try refreshing or check back later.
-                </p>
+            <div class="max-w-xl mx-auto text-center text-gray-400">
+                <h3 class="text-xl font-semibold mb-4">Oeps! Iets ging mis.</h3>
+                <p>We konden de projecten nu niet laden. Probeer het later opnieuw.</p>
             </div>
         @elseif($projects->isEmpty())
-            {{-- No projects found --}}
-            <div class="max-w-xl mx-auto bg-black text-white rounded-2xl p-10 text-center shadow-lg">
-                <h3 class="text-2xl font-bold mb-4">Nothing here yet 👀</h3>
-                <p class="text-gray-300">Looks like I haven’t added any projects to the portfolio yet. Stay tuned — cool
-                    stuff is coming soon.</p>
+            <div class="max-w-xl mx-auto text-center text-gray-400">
+                <h3 class="text-xl font-semibold mb-4">Nog niets hier 👀</h3>
+                <p>Toffe dingen zijn onderweg. Stay tuned.</p>
             </div>
         @else
-            {{-- Projects loaded --}}
-            <div class="grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+            <div class="grid gap-x-10 gap-y-16 md:grid-cols-2 lg:grid-cols-3">
                 @foreach ($projects as $project)
-                <div class="bg-white p-6 rounded-2xl shadow hover:shadow-xl transition">
-                    <img src="{{ $project->image }}" alt="{{ $project->title }}"
-                        class="rounded-xl mb-4 w-full h-48 object-cover">
-                    <h3 class="text-xl font-semibold mb-2">{{ $project->title }}</h3>
-                    <p class="text-gray-600 text-sm mb-4">{{ Str::limit($project->description, 100) }}</p>
-                    <a href="{{ route('projects.show', $project) }}"
-                        class="text-indigo-600 font-semibold hover:underline">View Project →</a>
-                </div>
-                
+                    <div class="group relative overflow-hidden rounded-2xl shadow-xl bg-neutral-700 transition-transform duration-500 hover:scale-[1.015]" data-aos="fade-up">
+                        <img src="{{ $project->image }}" alt="{{ $project->title }}"
+                             class="w-full h-64 object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-90">
+                        <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 md:p-8 flex flex-col justify-end">
+                            <h3 class="text-white text-lg font-semibold uppercase mb-2 tracking-wide">{{ $project->title }}</h3>
+                            <p class="text-sm text-gray-300 leading-relaxed">{{ Str::limit($project->description, 80) }}</p>
+                            <a href="{{ route('projects.show', $project) }}"
+                               class="mt-4 text-sm font-semibold uppercase text-white hover:underline transition">
+                                Bekijk project →
+                            </a>
+                        </div>
+                    </div>
                 @endforeach
             </div>
         @endif
 
-        <div class="text-center mt-12">
-            <a href="{{ url('/projects') }}" class="text-indigo-600 font-bold hover:underline text-lg">
-                See All Projects →
+        <div class="text-center mt-24" data-aos="fade-up">
+            <a href="{{ url('/projects') }}"
+               class="text-white font-semibold text-sm uppercase tracking-wide hover:underline">
+               Bekijk alle projecten →
             </a>
         </div>
     </section>
 
-
-    <section class="bg-white py-20 px-6 md:px-16 text-center rounded-lg">
-        <h2 class="text-3xl md:text-4xl font-bold mb-6">About Me</h2>
-        <p class="text-gray-600 max-w-2xl mx-auto text-lg leading-relaxed">
-            Hi, I'm Ravi, a 25-year-old aspiring creative front-end developer with a love for both the digital and
-            physical world. When I'm not shaping ideas on a screen, you can often find me outside, drawing inspiration
-            from the peace and beauty of nature. I'm passionate about creating and always eager to learn and grow.
+    {{-- ABOUT SECTION --}}
+    <section class="bg-neutral-900 py-36 px-6 md:px-16 xl:px-32 text-center text-white">
+        <h2 class="text-3xl md:text-4xl font-light tracking-wider uppercase mb-8" data-aos="fade-up">
+            Over mij
+        </h2>
+        <p class="text-gray-400 max-w-2xl mx-auto text-lg leading-relaxed mb-10" data-aos="fade-up" data-aos-delay="200">
+            Ik ben Ravi — een 25-jarige front-end developer die design, code en nieuwsgierigheid combineert.
+            Of ik nu wireframes teken of de natuur in trek, ik jaag altijd ideeën na die ertoe doen.
         </p>
-        <div class="mt-10">
-            <a href="{{ url('/about') }}"
-                class="inline-block px-6 py-3 border-2 border-indigo-600 text-indigo-600 rounded-xl hover:bg-indigo-600 hover:text-white transition">
-                Learn More
-            </a>
-        </div>
-    </section>
-
-    <section class="bg-indigo-600 text-white py-16 px-6 md:px-16 mt-20 text-center rounded-lg">
-        <h2 class="text-3xl md:text-4xl font-bold mb-4">Let’s Work Together</h2>
-        <p class="text-lg mb-8">Got a project or just want to say hey?</p>
-        <a href="{{ url('/contact') }}"
-            class="inline-block bg-white text-indigo-600 px-6 py-3 text-lg font-semibold rounded-xl hover:bg-gray-100 transition">
-            Contact Me
+        <a href="{{ url('/about') }}"
+           class="px-6 py-3 border border-white text-sm uppercase font-semibold tracking-wide rounded-full text-white hover:bg-white hover:text-black transition-all"
+           data-aos="fade-up" data-aos-delay="400">
+           Meer over mij
         </a>
     </section>
 
+    {{-- CONTACT SECTION --}}
+    <section class="bg-neutral-800 text-white py-36 px-6 md:px-16 xl:px-32 text-center">
+        <h2 class="text-3xl md:text-4xl font-light tracking-wider uppercase mb-6" data-aos="fade-up">
+            Laten we samenwerken
+        </h2>
+        <p class="text-base mb-12 text-gray-400 max-w-xl mx-auto" data-aos="fade-up" data-aos-delay="200">
+            Heb je een project of gewoon zin om te connecten? Ik sta altijd open voor een goed gesprek of een creatief idee.
+        </p>
+        <a href="{{ url('/contact') }}"
+           class="px-8 py-3 bg-white text-black text-sm uppercase font-semibold tracking-wide rounded-full hover:bg-gray-300 transition-all duration-300"
+           data-aos="fade-up" data-aos-delay="400">
+           Neem contact op
+        </a>
+    </section>
 </x-layout>
