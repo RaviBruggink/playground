@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="max-w-xl mx-auto mt-20 bg-neutral-900 text-white p-10 rounded-2xl shadow-xl">
+    <div class="max-w-xl mx-auto mt-20 bg-neutral-800 text-white p-10 rounded-2xl shadow-xl">
         <h2 class="text-3xl font-light uppercase tracking-wide mb-10 text-center">
             Nieuwe Gebruiker
         </h2>

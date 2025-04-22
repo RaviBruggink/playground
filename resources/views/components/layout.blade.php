@@ -24,13 +24,13 @@
 </button>
 
 
-<body class="bg-black text-white font-sans tracking-tight selection:bg-amber-300 selection:text-black">
+<body class="bg-neutral-900 text-white font-sans tracking-tight selection:bg-amber-300 selection:text-black">
 
     <!-- Navigation -->
     <nav class="w-full bg-black border-b border-white/10 sticky top-0 z-50">
         <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="text-lg font-semibold uppercase text-white">
-                <span class="text-amber-300">Ravi</span> Bruggink
+            <div class="text-lg uppercase text-white">
+                <span class="font-bold">Ravi</span> Bruggink
             </div>
 
             <!-- Hamburger -->
