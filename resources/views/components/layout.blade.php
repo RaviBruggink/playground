@@ -16,6 +16,14 @@
     @stack('styles')
 </head>
 
+<!-- Scroll to top button -->
+<button id="scrollToTop"
+    class="fixed bottom-6 right-6 z-40 w-10 h-10 bg-white text-black rounded-full shadow-md opacity-0 scale-90 transition-all duration-300 hover:scale-105 hover:shadow-lg"
+    aria-label="Scroll to top" onclick="window.scrollTo({ top: 0, behavior: 'smooth' })">
+    ↑
+</button>
+
+
 <body class="bg-black text-white font-sans tracking-tight selection:bg-amber-300 selection:text-black">
 
     <!-- Navigation -->
@@ -27,10 +35,9 @@
 
             <!-- Hamburger -->
             <button class="md:hidden text-white focus:outline-none" onclick="toggleMenu()">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none"
-                     viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                          d="M4 6h16M4 12h16M4 18h16" />
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                    stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                 </svg>
             </button>
 
@@ -65,17 +72,69 @@
     </footer>
 
     <!-- Cursor Dot -->
-    <div id="cursor-dot"
-         class="fixed top-0 left-0 w-3 h-3 bg-amber-300 rounded-full pointer-events-none z-50 transition-transform duration-150 ease-out">
+    <div id="cursor"
+        class="fixed top-0 left-0 z-50 w-5 h-5 rounded-full pointer-events-none mix-blend-difference bg-white opacity-90 animate-cursor-pulse">
     </div>
 
     <!-- Scripts -->
     <script>
-        const dot = document.getElementById('cursor-dot');
+        const cursor = document.getElementById('cursor');
+        let mouseX = 0,
+            mouseY = 0;
+        let currentX = 0,
+            currentY = 0;
+        let isClicked = false;
+
+        const lerp = (a, b, n) => (1 - n) * a + n * b;
+
+        const animate = () => {
+            currentX = lerp(currentX, mouseX, 0.15);
+            currentY = lerp(currentY, mouseY, 0.15);
+            cursor.style.transform = `translate3d(${currentX}px, ${currentY}px, 0) scale(${isClicked ? 1.5 : 1})`;
+            requestAnimationFrame(animate);
+        };
+
         window.addEventListener('mousemove', e => {
-            dot.style.transform = `translate(${e.clientX - 6}px, ${e.clientY - 6}px)`;
+            mouseX = e.clientX - 8;
+            mouseY = e.clientY - 8;
+        });
+
+        window.addEventListener('mousedown', () => {
+            isClicked = true;
+            cursor.classList.add('scale-[1.5]', 'opacity-70');
+        });
+
+        window.addEventListener('mouseup', () => {
+            isClicked = false;
+            cursor.classList.remove('scale-[1.5]', 'opacity-70');
+        });
+
+        // Hover effects on interactive elements
+        const interactive = document.querySelectorAll('a, button, input, textarea, .group, label');
+        interactive.forEach(el => {
+            el.addEventListener('mouseenter', () => {
+                cursor.classList.add('scale-[1.8]', 'opacity-70');
+            });
+            el.addEventListener('mouseleave', () => {
+                cursor.classList.remove('scale-[1.8]', 'opacity-70');
+            });
+        });
+
+        animate();
+
+        const scrollBtn = document.getElementById('scrollToTop');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 200) {
+                scrollBtn.classList.add('opacity-100', 'scale-100');
+                scrollBtn.classList.remove('opacity-0', 'scale-90');
+            } else {
+                scrollBtn.classList.add('opacity-0', 'scale-90');
+                scrollBtn.classList.remove('opacity-100', 'scale-100');
+            }
         });
     </script>
+
 
     @stack('scripts')
 </body>

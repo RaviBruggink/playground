@@ -7,7 +7,7 @@
 @php
     $baseClasses = "inline-block font-semibold py-2 px-4 rounded-full uppercase text-sm tracking-wide transition-all duration-200";
     $variants = [
-        'primary' => 'bg-amber-300 text-black hover:brightness-110',
+        'primary' => 'text-white border-2 border-solid hover:border-transparent hover:bg-white hover:text-black',
         'danger'  => 'bg-red-600 text-white hover:bg-red-700',
         'passive' => 'text-gray-400 hover:text-white hover:underline',
     ];
