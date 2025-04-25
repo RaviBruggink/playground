@@ -28,9 +28,9 @@
 
     <!-- Navigation -->
     <nav class="w-full bg-black border-b border-white/10 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+        <div class="mx-auto px-6 md:px-16 py-4 flex justify-between items-center">
             <div class="text-lg uppercase text-white">
-                <span class="font-bold">Ravi</span> Bruggink
+                <img src="images/watermark.svg" alt="Watermark" class="inline h-10 align-middle" />
             </div>
 
             <!-- Hamburger -->

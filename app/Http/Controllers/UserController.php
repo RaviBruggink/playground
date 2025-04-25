@@ -48,5 +48,4 @@ public function destroy(User $user)
 }
 
 
-
 }

@@ -1,6 +1,6 @@
 <x-layout>
-    <div class="max-w-xl mx-auto mt-20 bg-neutral-800 text-white p-10 rounded-2xl shadow-xl">
-        <h2 class="text-3xl font-light uppercase tracking-wide mb-10 text-center">
+    <div class="w-full max-w-xl mx-auto mt-10 sm:mt-20 bg-neutral-800 text-white px-6 py-8 sm:p-10 rounded-2xl shadow-xl">
+        <h2 class="text-2xl sm:text-3xl font-light uppercase tracking-wide mb-8 sm:mb-10 text-center">
             Nieuwe Gebruiker
         </h2>
 
@@ -36,12 +36,12 @@
             </div>
 
             {{-- ACTIES --}}
-            <div class="flex justify-end space-x-4 pt-6">
-                <x-button href="{{ route('users.index') }}" variant="passive">
+            <div class="flex flex-col sm:flex-row justify-between gap-3 pt-6">
+                <x-button href="{{ route('users.index') }}" variant="passive" class="w-full sm:w-auto">
                     Annuleren
                 </x-button>
 
-                <x-button type="submit">
+                <x-button type="submit" class="w-full sm:w-auto">
                     Opslaan
                 </x-button>
             </div>
