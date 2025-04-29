@@ -48,6 +48,7 @@
                 <x-nav-link href="{{ url('contact') }}" :active="request()->is('contact')">Contact</x-nav-link>
                 <x-nav-link href="{{ url('users') }}" :active="request()->is('users')">Users</x-nav-link>
                 <x-nav-link href="{{ route('projects.index') }}" :active="request()->is('projects')">Projects</x-nav-link>
+                <x-nav-link href="{{ url('models') }}" :active="request()->is('models')">Models</x-nav-link>
             </div>
         </div>
 
@@ -58,6 +59,7 @@
             <x-nav-link href="{{ url('contact') }}" :active="request()->is('contact')" class="block">Contact</x-nav-link>
             <x-nav-link href="{{ url('users') }}" :active="request()->is('users')" class="block">Users</x-nav-link>
             <x-nav-link href="{{ route('projects.index') }}" :active="request()->is('projects')" class="block">Projects</x-nav-link>
+            <x-nav-link href="{{ url('models') }}" :active="request()->is('models')">Models</x-nav-link>
         </div>
     </nav>
 
