@@ -26,5 +26,9 @@ Route::get('/models', function () {
     return view('models.index');
 })->name('models.index');
 
+Route::get('/projects/custom/graph', function () {
+    return view('projects.custom.graph');
+})->name('projects.custom.graph');
+
 
 

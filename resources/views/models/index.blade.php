@@ -261,61 +261,65 @@
 
     <section class="px-6 md:px-16">
         <!-- Raw Data Table -->
-        <div class=" bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 text-neutral-900 overflow-x-auto">
-            <h3 class="text-xl font-semibold mb-4">Ruwe Data (Tabelweergave)</h3>
-
-            <table class="min-w-full text-sm text-left border border-gray-200">
-                <thead class="bg-neutral-100 text-gray-700 font-medium">
-                    <tr>
-                        <th class="px-4 py-2 border border-gray-200">Model</th>
-                        <!-- Use case headers -->
-                        <script>
-                            document.write(
-                                allUseCases.map(useCase =>
-                                    `<th class="px-4 py-2 border border-gray-200">${useCase}</th>`
-                                ).join('')
-                            );
-                        </script>
-                    </tr>
-                </thead>
-                <tbody id="rawDataTableBody">
-                    <!-- Rows generated via JS -->
-                </tbody>
-            </table>
+        <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 text-neutral-900 overflow-x-auto">
+          <h3 class="text-xl font-semibold mb-4">Ruwe Data (Tabelweergave)</h3>
+      
+          <table class="min-w-full text-sm text-left border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+            <thead class="bg-neutral-100 text-gray-700 font-semibold uppercase text-xs tracking-wide">
+              <tr>
+                <th class="px-4 py-3 border border-gray-200">Model</th>
+                <script>
+                  document.write(
+                    allUseCases.map(useCase =>
+                      `<th class="px-4 py-3 border border-gray-200">${useCase}</th>`
+                    ).join('')
+                  );
+                </script>
+              </tr>
+            </thead>
+            <tbody id="rawDataTableBody">
+              <!-- Rows generated via JS -->
+            </tbody>
+          </table>
         </div>
-
+      
         <script>
-            function renderRawTable() {
-                const tbody = document.getElementById('rawDataTableBody');
-                tbody.innerHTML = '';
-
-                models
-                    .filter(model => visibleModels.has(model.label))
-                    .forEach(model => {
-                        const row = document.createElement('tr');
-                        row.innerHTML = `
-                            <td class="px-4 py-2 border border-gray-200 font-semibold text-gray-800">${model.label}</td>
-                            ${allUseCases.map(uc => {
-                                if (!visibleUseCases.has(uc)) return `<td class="px-4 py-2 border border-gray-200 text-gray-400 italic">-</td>`;
-                                const score = model.scores[uc];
-                                return `<td class="px-4 py-2 border border-gray-200 text-center">${score}</td>`;
-                            }).join('')}
-                        `;
-                        tbody.appendChild(row);
-                    });
-            }
-
-            // Initial table render
+          function renderRawTable() {
+            const tbody = document.getElementById('rawDataTableBody');
+            tbody.innerHTML = '';
+      
+            models
+              .filter(model => visibleModels.has(model.label))
+              .forEach(model => {
+                const row = document.createElement('tr');
+                row.className = 'hover:bg-neutral-50';
+      
+                row.innerHTML = `
+                  <td class="px-4 py-3 border border-gray-200 font-semibold text-gray-800">${model.label}</td>
+                  ${allUseCases.map(uc => {
+                    if (!visibleUseCases.has(uc)) {
+                      return `<td class="px-4 py-3 border border-gray-200 text-gray-400 italic text-center">-</td>`;
+                    }
+                    const score = model.scores[uc];
+                    return `<td class="px-4 py-3 border border-gray-200 text-center text-sm">${score}</td>`;
+                  }).join('')}
+                `;
+                tbody.appendChild(row);
+              });
+          }
+      
+          // Initial render
+          renderRawTable();
+      
+          // Sync table with chart filters
+          const originalUpdateChart = updateChart;
+          updateChart = function () {
+            originalUpdateChart();
             renderRawTable();
-
-            // Hook into existing filter logic
-            const originalUpdateChart = updateChart;
-            updateChart = function() {
-                originalUpdateChart();
-                renderRawTable();
-            };
+          };
         </script>
-    </section>
+      </section>
+      
 
 
     <section class="px-6 md:px-16">
