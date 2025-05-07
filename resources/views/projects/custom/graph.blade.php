@@ -27,32 +27,39 @@
             </div>
 
             {{-- Graph --}}
-            <section class="">
-                <div class="my-12 bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 text-neutral-900">
-                    <h3 class="text-xl font-semibold mb-4">Modelvoorkeur per Use Case</h3>
+            <section>
+                <div class="my-12 bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
+                    <h3 class="text-xl font-semibold mb-4 text-neutral-900">Modelvoorkeur per Use Case</h3>
 
                     <!-- Legenda + model filter -->
                     <div id="modelLegend" class="flex flex-wrap gap-4 mb-6 text-sm font-medium text-gray-700">
                         <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="GPT-4o">
                             <span class="w-3 h-3 rounded-full bg-blue-500"></span> GPT-4o
                         </div>
-                        <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="Moonly LLaMA 3">
-                            <span class="w-3 h-3 rounded-full bg-fuchsia-500"></span> Moonly LLaMA 3
+                        <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="Llama3 (Ollama)">
+                            <span class="w-3 h-3 rounded-full bg-fuchsia-500"></span> Llama3 (Ollama)
                         </div>
                         <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="Gemma (Ollama)">
                             <span class="w-3 h-3 rounded-full bg-green-500"></span> Gemma (Ollama)
                         </div>
-                        <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="Gemini 1.5 Pro">
-                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span> Gemini 1.5 Pro
+                        <div class="flex items-center gap-2 cursor-pointer model-toggle"
+                            data-model="LLaMa 3.3 (Ollama)">
+                            <span class="w-3 h-3 rounded-full bg-orange-500"></span> LLaMa 3.3 (Ollama)
                         </div>
-                        <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="Claude 3 Sonnet">
-                            <span class="w-3 h-3 rounded-full bg-purple-500"></span> Claude 3 Sonnet
+                        <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="Claude 3.5 Sonnet">
+                            <span class="w-3 h-3 rounded-full bg-purple-500"></span> Claude 3.5 Sonnet
+                        </div>
+                        <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="Claude 3.5 Haiku">
+                            <span class="w-3 h-3 rounded-full bg-teal-500"></span> Claude 3.5 Haiku
+                        </div>
+                        <div class="flex items-center gap-2 cursor-pointer model-toggle" data-model="Claude 3.7 Sonnet">
+                            <span class="w-3 h-3 rounded-full bg-yellow-500"></span> Claude 3.7 Sonnet
                         </div>
                     </div>
 
                     <!-- Use Case Filter -->
                     <div id="useCaseLegend" class="flex flex-wrap gap-4 mb-6 text-sm font-medium text-gray-700">
-                        @foreach (['Sales', 'Bugfixing', 'Code review', 'Documentation', 'Marketing', 'Research', 'Design', 'Testing', 'Deployment', 'Support'] as $useCase)
+                        @foreach (['Allround', 'Sales', 'Frontend development', 'Backend development', 'Laravel', 'Flutter', 'Python', 'Grammar & Spelling', 'Project management', 'Recruitment', 'Paralegal'] as $useCase)
                             <div class="cursor-pointer px-3 py-1 rounded-full bg-neutral-200 hover:bg-neutral-300 transition usecase-toggle"
                                 data-usecase="{{ $useCase }}">
                                 {{ $useCase }}
@@ -75,88 +82,127 @@
                     const ctx = document.getElementById('modelChart').getContext('2d');
 
                     const allUseCases = [
-                        'Sales', 'Bugfixing', 'Code review', 'Documentation', 'Marketing',
-                        'Research', 'Design', 'Testing', 'Deployment', 'Support'
+                        'Allround', 'Sales', 'Frontend development', 'Backend development', 'Laravel',
+                        'Flutter', 'Python', 'Grammar & Spelling', 'Project management', 'Recruitment', 'Paralegal'
                     ];
 
                     const models = [{
                             label: 'GPT-4o',
                             color: '#3b82f6',
                             scores: {
-                                Sales: 20,
-                                Bugfixing: 32,
-                                'Code review': 30,
-                                Documentation: 27,
-                                Marketing: 25,
-                                Research: 29,
-                                Design: 26,
-                                Testing: 30,
-                                Deployment: 28,
-                                Support: 31
+                                'Allround': 30,
+                                'Sales': 28,
+                                'Frontend development': 27,
+                                'Backend development': 29,
+                                'Laravel': 28,
+                                'Flutter': 26,
+                                'Python': 29,
+                                'Grammar & Spelling': 31,
+                                'Project management': 30,
+                                'Recruitment': 27,
+                                'Paralegal': 28
                             }
                         },
                         {
-                            label: 'Moonly LLaMA 3',
+                            label: 'Llama3 (Ollama)',
                             color: '#d946ef',
                             scores: {
-                                Sales: 22,
-                                Bugfixing: 20,
-                                'Code review': 23,
-                                Documentation: 21,
-                                Marketing: 24,
-                                Research: 22,
-                                Design: 23,
-                                Testing: 20,
-                                Deployment: 21,
-                                Support: 22
+                                'Allround': 24,
+                                'Sales': 23,
+                                'Frontend development': 25,
+                                'Backend development': 24,
+                                'Laravel': 23,
+                                'Flutter': 22,
+                                'Python': 24,
+                                'Grammar & Spelling': 22,
+                                'Project management': 23,
+                                'Recruitment': 21,
+                                'Paralegal': 22
                             }
                         },
                         {
                             label: 'Gemma (Ollama)',
                             color: '#10b981',
                             scores: {
-                                Sales: 24,
-                                Bugfixing: 23,
-                                'Code review': 22,
-                                Documentation: 25,
-                                Marketing: 26,
-                                Research: 24,
-                                Design: 22,
-                                Testing: 23,
-                                Deployment: 25,
-                                Support: 24
+                                'Allround': 26,
+                                'Sales': 25,
+                                'Frontend development': 24,
+                                'Backend development': 23,
+                                'Laravel': 24,
+                                'Flutter': 25,
+                                'Python': 26,
+                                'Grammar & Spelling': 24,
+                                'Project management': 25,
+                                'Recruitment': 23,
+                                'Paralegal': 24
                             }
                         },
                         {
-                            label: 'Gemini 1.5 Pro',
-                            color: '#fde047',
+                            label: 'LLaMa 3.3 (Ollama)',
+                            color: '#fb923c',
                             scores: {
-                                Sales: 27,
-                                Bugfixing: 26,
-                                'Code review': 28,
-                                Documentation: 25,
-                                Marketing: 27,
-                                Research: 26,
-                                Design: 27,
-                                Testing: 28,
-                                Deployment: 26,
-                                Support: 27
+                                'Allround': 25,
+                                'Sales': 24,
+                                'Frontend development': 26,
+                                'Backend development': 25,
+                                'Laravel': 26,
+                                'Flutter': 24,
+                                'Python': 25,
+                                'Grammar & Spelling': 23,
+                                'Project management': 24,
+                                'Recruitment': 22,
+                                'Paralegal': 23
                             }
                         },
                         {
-                            label: 'Claude 3 Sonnet',
+                            label: 'Claude 3.5 Sonnet',
                             color: '#a78bfa',
                             scores: {
-                                Sales: 23,
-                                Bugfixing: 21,
-                                'Code review': 22,
-                                Documentation: 24,
-                                Marketing: 23,
-                                Research: 22,
-                                Design: 24,
-                                Testing: 23,
-                                Deployment: 22,
-                                Support: 23
+                                'Allround': 28,
+                                'Sales': 26,
+                                'Frontend development': 27,
+                                'Backend development': 28,
+                                'Laravel': 27,
+                                'Flutter': 26,
+                                'Python': 27,
+                                'Grammar & Spelling': 30,
+                                'Project management': 28,
+                                'Recruitment': 26,
+                                'Paralegal': 27
+                            }
+                        },
+                        {
+                            label: 'Claude 3.5 Haiku',
+                            color: '#14b8a6',
+                            scores: {
+                                'Allround': 22,
+                                'Sales': 21,
+                                'Frontend development': 23,
+                                'Backend development': 22,
+                                'Laravel': 21,
+                                'Flutter': 20,
+                                'Python': 22,
+                                'Grammar & Spelling': 24,
+                                'Project management': 22,
+                                'Recruitment': 20,
+                                'Paralegal': 21
+                            }
+                        },
+                        {
+                            label: 'Claude 3.7 Sonnet',
+                            color: '#fde047',
+                            scores: {
+                                'Allround': 29,
+                                'Sales': 27,
+                                'Frontend development': 28,
+                                'Backend development': 29,
+                                'Laravel': 28,
+                                'Flutter': 27,
+                                'Python': 29,
+                                'Grammar & Spelling': 31,
+                                'Project management': 29,
+                                'Recruitment': 27,
+                                'Paralegal': 28
                             }
                         }
                     ];
@@ -307,12 +353,11 @@
 
                 <div data-aos="fade-left" class="space-y-6">
                     <h3 class="text-white text-lg sm:text-xl font-semibold uppercase">Meer info</h3>
-                    <p class="text-gray-400 leading-relaxed text-base sm:text-lg">Ik heb een eerste visuele opzet
-                        gemaakt van een grafiek die zou kunnen dienen als feedback dashboard.
-                        Dit is puur bedoeld als test om te verkennen hoe inzichten het beste gepresenteerd kunnen worden
-                        aan
-                        gebruikers, en niet als definitieve oplossing. Het prototype is bedoeld om visuele voorkeuren,
-                        klikgedrag en interpretatie te toetsen in de vervolgfase van usability testing.</p>
+                    <p class="text-gray-400 leading-relaxed text-base sm:text-lg">Tijdens mijn afstudeerstage bij Moonly
+                        Software heb ik onderzocht hoe A/B-testen toegepast kan worden op AI-modellen binnen diverse
+                        use-cases in hun AI-omgeving. De resultaten van deze tests heb ik geanalyseerd en gevisualiseerd
+                        in een clustered bar chart. Deze interactieve grafiek stelt gebruikers in staat om snel en
+                        overzichtelijk te zien welk taalmodel het beste presteert voor hun specifieke toepassing.</p>
                 </div>
             </div>
 

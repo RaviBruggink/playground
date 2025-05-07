@@ -263,7 +263,7 @@
         <!-- Raw Data Table -->
         <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 text-neutral-900 overflow-x-auto">
           <h3 class="text-xl font-semibold mb-4">Ruwe Data (Tabelweergave)</h3>
-      
+
           <table class="min-w-full text-sm text-left border border-gray-200 rounded-xl overflow-hidden shadow-sm">
             <thead class="bg-neutral-100 text-gray-700 font-semibold uppercase text-xs tracking-wide">
               <tr>
@@ -282,18 +282,18 @@
             </tbody>
           </table>
         </div>
-      
+
         <script>
           function renderRawTable() {
             const tbody = document.getElementById('rawDataTableBody');
             tbody.innerHTML = '';
-      
+
             models
               .filter(model => visibleModels.has(model.label))
               .forEach(model => {
                 const row = document.createElement('tr');
                 row.className = 'hover:bg-neutral-50';
-      
+
                 row.innerHTML = `
                   <td class="px-4 py-3 border border-gray-200 font-semibold text-gray-800">${model.label}</td>
                   ${allUseCases.map(uc => {
@@ -307,10 +307,10 @@
                 tbody.appendChild(row);
               });
           }
-      
+
           // Initial render
           renderRawTable();
-      
+
           // Sync table with chart filters
           const originalUpdateChart = updateChart;
           updateChart = function () {
@@ -319,13 +319,14 @@
           };
         </script>
       </section>
-      
+
 
 
     <section class="px-6 md:px-16">
         <!-- Radar Chart Component -->
         <div class="my-12 bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 text-neutral-900">
-            <h3 class="text-xl font-semibold mb-4">Modelvoorkeur per Use Case (Radar Chart)</h3>
+            <h3 class="text-xl font-semibold">Modelvoorkeur per Use Case (Radar Chart)</h3>
+            <h4 class="pb-4">Deze radar chart is als winder overzichtelijk ervaren</h4>
 
             <!-- Legenda + model filter (reuse same buttons as main component) -->
             <div id="modelLegendRadar" class="flex flex-wrap gap-4 mb-6 text-sm font-medium text-gray-700">

@@ -29,9 +29,9 @@
     <!-- Navigation -->
     <nav class="w-full bg-black border-b border-white/10 sticky top-0 z-50">
         <div class="mx-auto px-6 md:px-16 py-4 flex justify-between items-center">
-            <div class="text-lg uppercase text-white">
+            <a class="text-lg uppercase text-white" href="{{ url('/') }}">
                 <img src="images/watermark.svg" alt="Watermark" class="inline h-10 align-middle" />
-            </div>
+            </a>
 
             <!-- Hamburger -->
             <button class="md:hidden text-white focus:outline-none" onclick="toggleMenu()">
@@ -49,6 +49,8 @@
                 <x-nav-link href="{{ url('users') }}" :active="request()->is('users')">Users</x-nav-link>
                 <x-nav-link href="{{ route('projects.index') }}" :active="request()->is('projects')">Projects</x-nav-link>
                 <x-nav-link href="{{ url('models') }}" :active="request()->is('models')">Models</x-nav-link>
+                <x-nav-link href="{{ url('model-overview') }}" :active="request()->is('model-overview')">model-overview</x-nav-link>
+                
             </div>
         </div>
 
@@ -60,6 +62,7 @@
             <x-nav-link href="{{ url('users') }}" :active="request()->is('users')" class="block">Users</x-nav-link>
             <x-nav-link href="{{ route('projects.index') }}" :active="request()->is('projects')" class="block">Projects</x-nav-link>
             <x-nav-link href="{{ url('models') }}" :active="request()->is('models')">Models</x-nav-link>
+            <x-nav-link href="{{ url('model-overview') }}" :active="request()->is('model-overview')">model-overview</x-nav-link>
         </div>
     </nav>
 
@@ -75,7 +78,7 @@
 
     <!-- Cursor Dot -->
     <div id="cursor"
-        class="fixed top-0 left-0 z-50 w-5 h-5 rounded-full pointer-events-none mix-blend-difference bg-white opacity-90 animate-cursor-pulse">
+        class="fixed top-0 left-0 z-50 w-5 h-5 rounded-full pointer-events-none mix-blend-difference bg-white opacity-90 animate-cursor-pulse hidden lg:block">
     </div>
 
     <!-- Scripts -->

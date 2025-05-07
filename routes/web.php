@@ -5,6 +5,7 @@ use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ModelController;
 
 
 
@@ -29,6 +30,9 @@ Route::get('/models', function () {
 Route::get('/projects/custom/graph', function () {
     return view('projects.custom.graph');
 })->name('projects.custom.graph');
+
+// OF gebruik een controller (aanbevolen voor complexere logica)
+Route::get('/model-overview', [ModelController::class, 'index']);
 
 
 
