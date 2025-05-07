@@ -12,8 +12,8 @@
             menu.classList.toggle('hidden');
         }
     </script>
-
     @stack('styles')
+    @livewireStyles
 </head>
 
 <!-- Scroll to top button -->
@@ -140,7 +140,7 @@
         });
     </script>
 
-
+    @livewireScripts
     @stack('scripts')
 </body>
 

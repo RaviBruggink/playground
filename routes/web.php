@@ -1,38 +1,60 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
-use App\Models\User;
-use App\Http\Controllers\ProjectController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ModelController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\LivewireController;
 
+/*
+|--------------------------------------------------------------------------
+| Static Pages
+|--------------------------------------------------------------------------
+*/
+Route::view('/', 'home')->name('home');
+Route::view('/about', 'about')->name('about');
+Route::view('/contact', 'contact')->name('contact');
 
-
+/*
+|--------------------------------------------------------------------------
+| Resource Controllers
+|--------------------------------------------------------------------------
+*/
 Route::resource('users', UserController::class);
-Route::resource('projects', ProjectController::class)->only(['index', 'show']);
 
-Route::get('/', HomeController::class);
+Route::resource('projects', ProjectController::class)
+     ->only(['index', 'show'])
+     ->names([
+         'index' => 'projects.index',
+         'show'  => 'projects.show',
+     ]);
 
-
-Route::get('/about', function () {
-    return view('about');
+/*
+|--------------------------------------------------------------------------
+| Model Pages
+|--------------------------------------------------------------------------
+*/
+Route::name('models.')->group(function () {
+    // List of models
+    Route::view('/models', 'models.index')->name('index');
+    // More complex overview via controller
+    Route::get('/model-overview', [ModelController::class, 'index'])->name('overview');
 });
 
-Route::get('/contact', function () {
-    return view('contact');
+/*
+|--------------------------------------------------------------------------
+| Custom Project Routes
+|--------------------------------------------------------------------------
+*/
+Route::prefix('projects/custom')->name('projects.custom.')->group(function () {
+    Route::view('graph', 'projects.custom.graph')->name('graph');
 });
 
-Route::get('/models', function () {
-    return view('models.index');
-})->name('models.index');
-
-Route::get('/projects/custom/graph', function () {
-    return view('projects.custom.graph');
-})->name('projects.custom.graph');
-
-// OF gebruik een controller (aanbevolen voor complexere logica)
-Route::get('/model-overview', [ModelController::class, 'index']);
-
-
-
+/*
+|--------------------------------------------------------------------------
+| Livewire Assignment
+|--------------------------------------------------------------------------
+*/
+Route::get('/livewire-assignment', [LivewireController::class, 'index'])
+     ->name('livewire.assignment');
