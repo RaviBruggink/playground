@@ -2,7 +2,10 @@
 
     <section class="px-6 md:px-16 pt-20 bg-neutral-900 text-neutral-800">
         <div class="my-12 bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200">
-            <h3 class="text-xl font-semibold mb-4">Modelvoorkeur per Use Case</h3>
+            <h3 class="text-xl font-semibold">Modelvoorkeur per Use Case</h3>
+            <h2 class="text-md mb-8 w-2/3">De scores in deze grafiek geven aan hoe vaak het antwoord van een AI-model als het beste werd gekozen
+                door gebruikers tijdens tests binnen een specifieke use case. Hoe hoger de score, hoe vaker de output
+                van het model de voorkeur kreeg ten opzichte van andere modellen in vergelijkbare situaties.</h2>
 
             <!-- Legenda + model filter -->
             <div id="modelLegend" class="flex flex-wrap gap-4 mb-6 text-sm font-medium text-gray-700">
@@ -25,7 +28,7 @@
 
             <!-- Use Case Filter -->
             <div id="useCaseLegend" class="flex flex-wrap gap-4 mb-6 text-sm font-medium text-gray-700">
-                @foreach (['Sales', 'Bugfixing', 'Code review', 'Documentation', 'Marketing', 'Research', 'Design', 'Testing', 'Deployment', 'Support'] as $useCase)
+                @foreach (['HR & communicatie', 'Technische documentatie', 'Code & reviewondersteuning', 'Beleids- en teamtaken', 'Marketing & content', 'Onderzoek & analyse', 'Klantenservice & support', 'Testen & validatie'] as $useCase)
                     <div class="cursor-pointer px-3 py-1 rounded-full bg-neutral-200 hover:bg-neutral-300 transition usecase-toggle"
                         data-usecase="{{ $useCase }}">
                         {{ $useCase }}
@@ -48,91 +51,88 @@
             const ctx = document.getElementById('modelChart').getContext('2d');
 
             const allUseCases = [
-                'Sales', 'Bugfixing', 'Code review', 'Documentation', 'Marketing',
-                'Research', 'Design', 'Testing', 'Deployment', 'Support'
+                'HR & communicatie',
+                'Technische documentatie',
+                'Code & reviewondersteuning',
+                'Beleids- en teamtaken',
+                'Marketing & content',
+                'Onderzoek & analyse',
+                'Klantenservice & support',
+                'Testen & validatie'
             ];
 
             const models = [{
                     label: 'GPT-4o',
                     color: '#3b82f6',
                     scores: {
-                        Sales: 20,
-                        Bugfixing: 32,
-                        'Code review': 30,
-                        Documentation: 27,
-                        Marketing: 25,
-                        Research: 29,
-                        Design: 26,
-                        Testing: 30,
-                        Deployment: 28,
-                        Support: 31
+                        'HR & communicatie': 32,
+                        'Technische documentatie': 33,
+                        'Code & reviewondersteuning': 27,
+                        'Beleids- en teamtaken': 30,
+                        'Marketing & content': 30,
+                        'Onderzoek & analyse': 32,
+                        'Klantenservice & support': 31,
+                        'Testen & validatie': 30
                     }
                 },
                 {
                     label: 'Moonly LLaMA 3',
                     color: '#d946ef',
                     scores: {
-                        Sales: 22,
-                        Bugfixing: 20,
-                        'Code review': 23,
-                        Documentation: 21,
-                        Marketing: 24,
-                        Research: 22,
-                        Design: 23,
-                        Testing: 20,
-                        Deployment: 21,
-                        Support: 22
+                        'HR & communicatie': 26,
+                        'Technische documentatie': 28,
+                        'Code & reviewondersteuning': 26,
+                        'Beleids- en teamtaken': 25,
+                        'Marketing & content': 25,
+                        'Onderzoek & analyse': 27,
+                        'Klantenservice & support': 24,
+                        'Testen & validatie': 25
                     }
                 },
                 {
                     label: 'Gemma (Ollama)',
                     color: '#10b981',
                     scores: {
-                        Sales: 24,
-                        Bugfixing: 23,
-                        'Code review': 22,
-                        Documentation: 25,
-                        Marketing: 26,
-                        Research: 24,
-                        Design: 22,
-                        Testing: 23,
-                        Deployment: 25,
-                        Support: 24
+                        'HR & communicatie': 32,
+                        'Technische documentatie': 23,
+                        'Code & reviewondersteuning': 22,
+                        'Beleids- en teamtaken': 33,
+                        'Marketing & content': 27,
+                        'Onderzoek & analyse': 31,
+                        'Klantenservice & support': 22,
+                        'Testen & validatie': 21
                     }
                 },
                 {
                     label: 'Gemini 1.5 Pro',
                     color: '#fde047',
                     scores: {
-                        Sales: 27,
-                        Bugfixing: 26,
-                        'Code review': 28,
-                        Documentation: 25,
-                        Marketing: 27,
-                        Research: 26,
-                        Design: 27,
-                        Testing: 28,
-                        Deployment: 26,
-                        Support: 27
+                        'HR & communicatie': 30,
+                        'Technische documentatie': 31,
+                        'Code & reviewondersteuning': 29,
+                        'Beleids- en teamtaken': 30,
+                        'Marketing & content': 33,
+                        'Onderzoek & analyse': 34,
+                        'Klantenservice & support': 30,
+                        'Testen & validatie': 29
                     }
                 },
                 {
                     label: 'Claude 3 Sonnet',
                     color: '#a78bfa',
                     scores: {
-                        Sales: 23,
-                        Bugfixing: 21,
-                        'Code review': 22,
-                        Documentation: 24,
-                        Marketing: 23,
-                        Research: 22,
-                        Design: 24,
-                        Testing: 23,
-                        Deployment: 22,
-                        Support: 23
+                        'HR & communicatie': 33,
+                        'Technische documentatie': 30,
+                        'Code & reviewondersteuning': 32,
+                        'Beleids- en teamtaken': 32,
+                        'Marketing & content': 31,
+                        'Onderzoek & analyse': 30,
+                        'Klantenservice & support': 31,
+                        'Testen & validatie': 28
                     }
                 }
             ];
+
 
             let visibleModels = new Set(models.map(m => m.label));
             let visibleUseCases = new Set(allUseCases);
@@ -175,7 +175,7 @@
                             },
                             grid: {
                                 color: 'rgba(0,0,0,0.05)'
-                            },
+                            }
                         }
                     },
                     plugins: {
@@ -195,7 +195,6 @@
                 chart.update();
             }
 
-            // === Model filter behavior ===
             document.querySelectorAll('.model-toggle').forEach(el => {
                 el.addEventListener('click', () => {
                     const model = el.dataset.model;
@@ -226,7 +225,6 @@
                 });
             });
 
-            // === Use case filter behavior ===
             document.querySelectorAll('.usecase-toggle').forEach(el => {
                 el.addEventListener('click', () => {
                     const uc = el.dataset.usecase;
@@ -259,66 +257,70 @@
         </script>
     </section>
 
+
     <section class="px-6 md:px-16">
         <!-- Raw Data Table -->
         <div class="bg-gray-50 p-6 rounded-xl shadow-sm border border-gray-200 text-neutral-900 overflow-x-auto">
-          <h3 class="text-xl font-semibold mb-4">Ruwe Data (Tabelweergave)</h3>
+            <h3 class="text-xl font-semibold mb-4">Ruwe Data (Tabelweergave)</h3>
 
-          <table class="min-w-full text-sm text-left border border-gray-200 rounded-xl overflow-hidden shadow-sm">
-            <thead class="bg-neutral-100 text-gray-700 font-semibold uppercase text-xs tracking-wide">
-              <tr>
-                <th class="px-4 py-3 border border-gray-200">Model</th>
-                <script>
-                  document.write(
-                    allUseCases.map(useCase =>
-                      `<th class="px-4 py-3 border border-gray-200">${useCase}</th>`
-                    ).join('')
-                  );
-                </script>
-              </tr>
-            </thead>
-            <tbody id="rawDataTableBody">
-              <!-- Rows generated via JS -->
-            </tbody>
-          </table>
+            <table class="min-w-full text-sm text-left border border-gray-200 rounded-xl overflow-hidden shadow-sm">
+                <thead class="bg-neutral-100 text-gray-700 font-semibold uppercase text-xs tracking-wide">
+                    <tr>
+                        <th class="px-4 py-3 border border-gray-200">Model</th>
+                        <script>
+                            document.write(
+                                allUseCases.map(useCase =>
+                                    `<th class="px-4 py-3 border border-gray-200">${useCase}</th>`
+                                ).join('')
+                            );
+                        </script>
+                    </tr>
+                </thead>
+                <tbody id="rawDataTableBody">
+                    <!-- Rows generated via JS -->
+                </tbody>
+            </table>
         </div>
 
         <script>
-          function renderRawTable() {
-            const tbody = document.getElementById('rawDataTableBody');
-            tbody.innerHTML = '';
+            function renderRawTable() {
+                const tbody = document.getElementById('rawDataTableBody');
+                tbody.innerHTML = '';
 
-            models
-              .filter(model => visibleModels.has(model.label))
-              .forEach(model => {
-                const row = document.createElement('tr');
-                row.className = 'hover:bg-neutral-50';
+                models
+                    .filter(model => visibleModels.has(model.label))
+                    .forEach(model => {
+                        const row = document.createElement('tr');
+                        row.className = 'hover:bg-neutral-50';
 
-                row.innerHTML = `
+                        row.innerHTML = `
                   <td class="px-4 py-3 border border-gray-200 font-semibold text-gray-800">${model.label}</td>
                   ${allUseCases.map(uc => {
                     if (!visibleUseCases.has(uc)) {
                       return `<td class="px-4 py-3 border border-gray-200 text-gray-400 italic text-center">-</td>`;
                     }
                     const score = model.scores[uc];
-                    return `<td class="px-4 py-3 border border-gray-200 text-center text-sm">${score}</td>`;
-                  }).join('')}
-                `;
-                tbody.appendChild(row);
-              });
-          }
+                    return ` < td class = "px-4 py-3 border border-gray-200 text-center text-sm" > $ {
+                            score
+                        } < /td>`;
+            }).join('')
+    }
+    `;
+                                        tbody.appendChild(row);
+                                      });
+                                  }
 
-          // Initial render
-          renderRawTable();
+                                  // Initial render
+                                  renderRawTable();
 
-          // Sync table with chart filters
-          const originalUpdateChart = updateChart;
-          updateChart = function () {
-            originalUpdateChart();
-            renderRawTable();
-          };
+                                  // Sync table with chart filters
+                                  const originalUpdateChart = updateChart;
+                                  updateChart = function () {
+                                    originalUpdateChart();
+                                    renderRawTable();
+                                  };
         </script>
-      </section>
+    </section>
 
 
 
