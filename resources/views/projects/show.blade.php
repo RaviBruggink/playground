@@ -70,10 +70,5 @@
                 </a>
             </div>
         </div>
-
-        <!-- Japanese Text -->
-        <div class="fixed bottom-8 left-8 text-5xl font-bold opacity-10 select-none pointer-events-none">
-            プロジェクト
-        </div>
     </article>
 </x-layout>

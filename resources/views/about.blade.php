@@ -65,10 +65,5 @@
                      class="w-64 h-64 object-cover grayscale hover:grayscale-0 transition-all duration-500">
             </div>
         </div>
-
-        <!-- Japanese Text -->
-        <div class="fixed bottom-8 left-8 text-5xl font-bold opacity-10 select-none pointer-events-none">
-            オーバービュー
-        </div>
     </div>
 </x-layout>

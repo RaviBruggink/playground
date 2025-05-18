@@ -65,7 +65,19 @@
     @livewireStyles
 </head>
 
-<body class="bg-black text-white font-sans">
+<body class="bg-black text-white font-sans" 
+      x-data="{ 
+          atTop: true, 
+          atBottom: false,
+          checkScroll() {
+              this.atTop = window.pageYOffset < 100;
+              this.atBottom = (window.innerHeight + window.pageYOffset) >= document.documentElement.scrollHeight - 100;
+          }
+      }" 
+      x-init="
+          checkScroll();
+          window.addEventListener('scroll', () => checkScroll());
+      ">
     <!-- Navigation -->
     <nav class="fixed top-0 left-0 w-full z-50 mix-blend-difference">
         <div class="mx-auto px-6 md:px-16 py-6 flex justify-between items-center">
@@ -104,8 +116,36 @@
         {{ $slot }}
     </main>
 
+    <!-- Scroll Button -->
+    <div class="fixed right-8 bottom-32 z-50 mix-blend-difference"
+         x-show="!atTop || !atBottom"
+         x-transition:enter="transition ease-out duration-300"
+         x-transition:enter-start="opacity-0 transform translate-y-2"
+         x-transition:enter-end="opacity-100 transform translate-y-0"
+         x-transition:leave="transition ease-in duration-300"
+         x-transition:leave-start="opacity-100 transform translate-y-0"
+         x-transition:leave-end="opacity-0 transform translate-y-2">
+        <button @click="atBottom ? window.scrollTo({top: 0, behavior: 'smooth'}) : window.scrollTo({top: document.documentElement.scrollHeight, behavior: 'smooth'})"
+                class="bg-transparent border border-white rounded-full p-3 hover:bg-white hover:text-black transition-all duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" 
+                 class="h-6 w-6 transform transition-transform duration-300"
+                 :class="atBottom ? 'rotate-180' : ''"
+                 fill="none" 
+                 viewBox="0 0 24 24" 
+                 stroke="currentColor">
+                <path stroke-linecap="round" 
+                      stroke-linejoin="round" 
+                      stroke-width="2" 
+                      d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+            </svg>
+        </button>
+    </div>
+
     <!-- Custom Cursor -->
     <div class="cursor hidden lg:block"></div>
+
+    <!-- Watermark -->
+    <x-watermark />
 
     <!-- Scripts -->
     <script>
