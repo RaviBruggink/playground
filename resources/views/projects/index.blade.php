@@ -10,48 +10,58 @@
 @endpush
 
 <x-layout>
-    <section class="py-32 px-6 md:px-16 xl:px-32 bg-neutral-900 text-white">
-        <h1 class="text-5xl font-light uppercase tracking-wide text-center mb-24" data-aos="fade-up">
-            Mijn Projecten
-        </h1>
-
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-10 gap-y-16">
-
-            {{-- Hardcoded project card --}}
-            <a href="{{ route('projects.custom.graph') }}"
-               class="group relative overflow-hidden rounded-2xl shadow-xl bg-neutral-800 transition-transform duration-500 hover:scale-[1.015] hover:shadow-2xl"
-               data-aos="fade-up" data-aos-delay="{{ count($projects) * 100 }}">
-
-                <img src="{{ asset('images/graph.png') }}" alt="Hardcoded Project"
-                     class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-95">
-
-                <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
-                    <h2 class="text-white text-xl font-semibold uppercase mb-2 tracking-wide">
-                        AI-model graph
-                    </h2>
-                    <p class="text-sm text-gray-300 leading-relaxed">A prototyping challenge to explore AI-model performance across various use cases.</p>
-                </div>
-            </a>
-            
-            {{-- Loop over dynamic projects --}}
-            @foreach ($projects as $project)
-                <a href="{{ route('projects.show', $project) }}"
-                   class="group relative overflow-hidden rounded-2xl shadow-xl bg-neutral-800 transition-transform duration-500 hover:scale-[1.015] hover:shadow-2xl"
-                   data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-
-                    @if ($project->image)
-                        <img src="{{ asset($project->image) }}" alt="{{ $project->title }}"
-                             class="w-full h-72 object-cover transition-transform duration-500 group-hover:scale-105 group-hover:brightness-95">
-                    @endif
-
-                    <div class="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6 md:p-8">
-                        <h2 class="text-white text-xl font-semibold uppercase mb-2 tracking-wide">
+    <div class="px-6 md:px-16">
+        <!-- Project List -->
+        <div class="border-t border-white/20">
+            @foreach ($projects as $index => $project)
+                <a href="{{ route('projects.show', $project) }}" 
+                   class="group block py-8 border-b border-white/20 hover:opacity-50 transition-opacity">
+                    <div class="grid grid-cols-12 gap-4 items-center">
+                        <div class="col-span-1 font-mono text-sm">
+                            {{ str_pad($index + 1, 2, '0', STR_PAD_LEFT) }}
+                        </div>
+                        <div class="col-span-4 font-mono uppercase">
                             {{ $project->title }}
-                        </h2>
-                        <p class="text-sm text-gray-300 leading-relaxed">{{ Str::limit($project->description, 90) }}</p>
+                        </div>
+                        <div class="col-span-3 font-mono text-white/60">
+                            {{ $project->category ?? 'NARRATIVE' }}
+                        </div>
+                        <div class="col-span-2 font-mono text-white/60">
+                            {{ $project->duration ?? '02\' 47"' }}
+                        </div>
+                        <div class="col-span-2 font-mono text-white/60 text-right">
+                            {{ $project->year ?? '2024' }}
+                        </div>
                     </div>
                 </a>
             @endforeach
+
+            <!-- Hardcoded Graph Project -->
+            <a href="{{ route('projects.custom.graph') }}" 
+               class="group block py-8 border-b border-white/20 hover:opacity-50 transition-opacity">
+                <div class="grid grid-cols-12 gap-4 items-center">
+                    <div class="col-span-1 font-mono text-sm">
+                        {{ str_pad(count($projects) + 1, 2, '0', STR_PAD_LEFT) }}
+                    </div>
+                    <div class="col-span-4 font-mono uppercase">
+                        AI Model Graph
+                    </div>
+                    <div class="col-span-3 font-mono text-white/60">
+                        DATA
+                    </div>
+                    <div class="col-span-2 font-mono text-white/60">
+                        03\' 49"
+                    </div>
+                    <div class="col-span-2 font-mono text-white/60 text-right">
+                        2024
+                    </div>
+                </div>
+            </a>
         </div>
-    </section>
+
+        <!-- Japanese Text -->
+        <div class="fixed bottom-8 left-8 text-5xl font-bold opacity-10 select-none pointer-events-none">
+            えいかかんとく
+        </div>
+    </div>
 </x-layout>

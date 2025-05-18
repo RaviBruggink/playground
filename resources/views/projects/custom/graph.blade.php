@@ -354,7 +354,7 @@
                 <div data-aos="fade-left" class="space-y-6">
                     <h3 class="text-white text-lg sm:text-xl font-semibold uppercase">Meer info</h3>
                     <p class="text-gray-400 leading-relaxed text-base sm:text-lg">Tijdens mijn afstudeerstage bij Moonly
-                        Software heb ik onderzocht hoe A/B-testen toegepast kan worden op AI-modellen binnen diverse
+                        Software in Eindhoven heb ik onderzocht hoe A/B-testen toegepast kan worden op AI-modellen binnen diverse
                         use-cases in hun AI-omgeving. De resultaten van deze tests heb ik geanalyseerd en gevisualiseerd
                         in een clustered bar chart. Deze interactieve grafiek stelt gebruikers in staat om snel en
                         overzichtelijk te zien welk taalmodel het beste presteert voor hun specifieke toepassing.</p>

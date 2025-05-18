@@ -9,20 +9,16 @@ use App\Http\Controllers\LivewireController;
 
 /*
 |--------------------------------------------------------------------------
-| Static Pages
+| Public Routes
 |--------------------------------------------------------------------------
 */
-Route::view('/', 'home')->name('home');
+
+// Static Pages
+Route::get('/', HomeController::class)->name('home');
 Route::view('/about', 'about')->name('about');
 Route::view('/contact', 'contact')->name('contact');
 
-/*
-|--------------------------------------------------------------------------
-| Resource Controllers
-|--------------------------------------------------------------------------
-*/
-Route::resource('users', UserController::class);
-
+// Projects (Public)
 Route::resource('projects', ProjectController::class)
      ->only(['index', 'show'])
      ->names([
@@ -30,31 +26,25 @@ Route::resource('projects', ProjectController::class)
          'show'  => 'projects.show',
      ]);
 
-/*
-|--------------------------------------------------------------------------
-| Model Pages
-|--------------------------------------------------------------------------
-*/
-Route::name('models.')->group(function () {
-    // List of models
-    Route::view('/models', 'models.index')->name('index');
-    // More complex overview via controller
-    Route::get('/model-overview', [ModelController::class, 'index'])->name('overview');
-});
-
-/*
-|--------------------------------------------------------------------------
-| Custom Project Routes
-|--------------------------------------------------------------------------
-*/
+// Custom Project Routes
 Route::prefix('projects/custom')->name('projects.custom.')->group(function () {
     Route::view('graph', 'projects.custom.graph')->name('graph');
 });
 
 /*
 |--------------------------------------------------------------------------
-| Livewire Assignment
+| Admin Routes (Protected)
 |--------------------------------------------------------------------------
 */
-Route::get('/livewire-assignment', [LivewireController::class, 'index'])
-     ->name('livewire.assignment');
+Route::middleware(['admin'])->prefix('admin')->name('admin.')->group(function () {
+    // Users Management
+    Route::resource('users', UserController::class);
+    
+    // Models Management
+    Route::view('/models', 'models.index')->name('models.index');
+    Route::get('/model-overview', [ModelController::class, 'index'])->name('models.overview');
+    
+    // Livewire Assignment (if needed in admin)
+    Route::get('/livewire-assignment', [LivewireController::class, 'index'])
+         ->name('livewire.assignment');
+});

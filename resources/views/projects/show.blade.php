@@ -10,71 +10,70 @@
 @endpush
 
 <x-layout>
-    <section class="bg-black text-white">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 md:px-12 py-16 sm:py-24 space-y-24 sm:space-y-32">
+    <article class="min-h-screen">
+        <!-- Hero Image -->
+        @if ($project->image)
+            <div class="h-[80vh] w-full relative overflow-hidden">
+                <img src="{{ asset($project->image) }}" 
+                     alt="{{ $project->title }}"
+                     class="absolute inset-0 w-full h-full object-cover">
+            </div>
+        @endif
 
-            {{-- Hero Section --}}
-            <div class="text-center px-4" data-aos="fade-up">
-                <h1 class="text-4xl sm:text-5xl md:text-6xl font-light uppercase tracking-wide mb-6">
+        <!-- Content -->
+        <div class="px-6 md:px-16 py-24">
+            <!-- Project Info -->
+            <div class="grid grid-cols-12 gap-4 border-t border-b border-white/20 py-8">
+                <div class="col-span-4 font-mono uppercase">
                     {{ $project->title }}
-                </h1>
-                <p class="text-gray-400 max-w-2xl mx-auto text-base sm:text-lg">
-                    {{ $project->description }}
-                </p>
+                </div>
+                <div class="col-span-3 font-mono text-white/60">
+                    {{ $project->category ?? 'NARRATIVE' }}
+                </div>
+                <div class="col-span-3 font-mono text-white/60">
+                    {{ $project->duration ?? '02\' 47"' }}
+                </div>
+                <div class="col-span-2 font-mono text-white/60 text-right">
+                    {{ $project->year ?? '2024' }}
+                </div>
             </div>
 
-            {{-- Main Image --}}
+            <!-- Project Description -->
+            <div class="max-w-3xl mt-24 mb-32">
+                <p class="text-lg leading-relaxed font-mono text-white/80">
+                    {{ $project->description }}
+                </p>
+                @if ($project->extra_text)
+                    <p class="mt-8 text-lg leading-relaxed font-mono text-white/80">
+                        {{ $project->extra_text }}
+                    </p>
+                @endif
+            </div>
+
+            <!-- Additional Images -->
             @if ($project->image)
-                <div class="w-full" data-aos="fade-up" data-aos-delay="100">
-                    <img src="{{ asset($project->image) }}" alt="{{ $project->title }}"
-                         class="w-full rounded-2xl shadow-xl object-cover transition-all duration-500 transform hover:scale-105 hover:brightness-110" />
+                <div class="grid grid-cols-2 gap-8">
+                    <img src="{{ asset($project->image) }}" 
+                         alt="{{ $project->title }} detail 1"
+                         class="w-full aspect-[4/3] object-cover">
+                    <img src="{{ asset($project->image) }}" 
+                         alt="{{ $project->title }} detail 2"
+                         class="w-full aspect-[4/3] object-cover">
                 </div>
             @endif
 
-            {{-- Details Section --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-start px-4">
-                <div data-aos="fade-right">
-                    <h3 class="text-sm uppercase tracking-widest text-gray-500 mb-4">Categorie</h3>
-                    <ul class="text-gray-300 space-y-2 text-base">
-                        <li>Branding</li>
-                        <li>UX/UI Design</li>
-                        <li>Webontwikkeling</li>
-                    </ul>
-
-                    <h3 class="text-sm uppercase tracking-widest text-gray-500 mt-10 mb-4">Jaar</h3>
-                    <p class="text-gray-300 text-base">2022</p>
-
-                    <h3 class="text-sm uppercase tracking-widest text-gray-500 mt-10 mb-4">Prijzen</h3>
-                    <ul class="text-gray-300 space-y-2 text-base">
-                        <li>1× Awwwards (Honours)</li>
-                        <li>1× CSS Design Awards (Site van de dag)</li>
-                    </ul>
-                </div>
-
-                <div data-aos="fade-left" class="space-y-6">
-                    @if ($project->extra_text)
-                        <h3 class="text-white text-lg sm:text-xl font-semibold uppercase">Meer info</h3>
-                        <p class="text-gray-400 leading-relaxed text-base sm:text-lg">{{ $project->extra_text }}</p>
-                    @endif
-                </div>
-            </div>
-
-            {{-- Extra Imagery or Visual --}}
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 items-center px-4" data-aos="fade-up" data-aos-delay="200">
-                <img src="{{ asset($project->image) }}" class="rounded-xl shadow-lg transition-transform duration-500 hover:scale-105 w-full" alt="Mockup">
-                <p class="text-gray-400 text-base sm:text-lg leading-relaxed">
-                    Een visueel voorbeeld van hoe de branding of website zich vertaalt naar een eindproduct.
-                    Denk aan interactie, mobiele weergave of zelfs printmateriaal. Alles draait hier om gevoel en consistentie.
-                </p>
-            </div>
-
-            {{-- Back Link --}}
-            <div class="text-center pt-12 sm:pt-16" data-aos="fade-up">
-                <a href="{{ route('projects.index') }}"
-                   class="relative inline-block text-sm text-gray-300 uppercase font-semibold tracking-wide hover:pr-2 hover:underline transition-all duration-300">
-                    ← Terug naar alle projecten
+            <!-- Back Link -->
+            <div class="mt-24 inline-block">
+                <a href="{{ route('projects.index') }}" 
+                   class="font-mono text-sm uppercase hover:opacity-50 transition-opacity">
+                    ← Back to overview
                 </a>
             </div>
         </div>
-    </section>
+
+        <!-- Japanese Text -->
+        <div class="fixed bottom-8 left-8 text-5xl font-bold opacity-10 select-none pointer-events-none">
+            プロジェクト
+        </div>
+    </article>
 </x-layout>
